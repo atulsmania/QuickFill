@@ -1,0 +1,19 @@
+{
+  "name": "Fill Form",
+  "version": "1.0.0",
+  "description": "Fill form easily by your own mentioned shortcuts",
+  "manifest_version": 3,
+  "author": "Atul Chauhan",
+  "permissions": ["activeTab", "storage"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "run_at": "document_idle",
+      "js": ["/js/content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Latest Covid Report"
+  }
+}
