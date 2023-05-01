@@ -5,7 +5,6 @@
 
   const elements = document.querySelectorAll(
     "input[type=text]",
-    "input[type=text]",
     "input[type=search]",
     "input[type=url]",
     "input[type=checkbox]"
