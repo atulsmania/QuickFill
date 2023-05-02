@@ -1,7 +1,7 @@
 {
-  "name": "Fill Form",
+  "name": "QuickFill",
   "version": "1.0.0",
-  "description": "Fill form easily by your own mentioned shortcuts",
+  "description": "Quickly fill inputs easily by your own mentioned shortcuts",
   "manifest_version": 3,
   "author": "Atul Chauhan",
   "permissions": ["activeTab", "storage"],
@@ -14,6 +14,6 @@
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Form Fill Helper"
+    "default_title": "QuickFill"
   }
 }

@@ -1,4 +1,4 @@
-# From fill helper
+# QuickFill
 
 Helps in filling input using custom text snippets.
 
