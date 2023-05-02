@@ -12,8 +12,8 @@ The goal of this extension is to create a user-friendly form filling system that
 
 ##### Add key alongside with the value that will replace it.
 
-![App Screenshot](https://i.ibb.co/x3xVJxz/use-shortcut.gif)
+![App Screenshot](https://i.ibb.co/MZvf9jD/add-shortcut.gif)
 
 ##### Use your shortcut in inputs appending `@` at the start.
 
-![App Screenshot](https://i.ibb.co/MZvf9jD/add-shortcut.gif)
+![App Screenshot](https://i.ibb.co/x3xVJxz/use-shortcut.gif)
