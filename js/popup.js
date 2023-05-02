@@ -56,19 +56,12 @@
   }
 
   function addEntry({ key, value }) {
-    const tableDataStyles = {
-      border: "1px solid #dddddd",
-      textAlign: "left",
-      padding: "8px",
-    };
     const row = table.insertRow();
 
     const keyCell = row.insertCell();
-    keyCell.style = tableDataStyles;
     keyCell.textContent = key;
 
     const valueCell = row.insertCell();
-    valueCell.style = tableDataStyles;
     valueCell.textContent = value;
 
     const deleteBtn = document.createElement("button");

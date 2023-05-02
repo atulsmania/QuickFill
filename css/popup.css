@@ -1,5 +1,11 @@
 body {
-  min-width: 300px;
+  width: 300px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 table {
@@ -11,7 +17,12 @@ table {
 table td,
 table th {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 4px;
+  max-width: 160px;
+  width: 100%;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 table tr:nth-child(even) {
