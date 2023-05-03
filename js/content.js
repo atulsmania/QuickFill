@@ -8,8 +8,10 @@ chrome.storage.local.get([localStorageIdentifier], function (e) {
 
 let lastFocused;
 const observer = new MutationObserver(() => {
-  const focusedElement = document.activeElement;
-  console.log(focusedElement);
+  let focusedElement =
+    findIframe(document.activeElement)?.contentDocument?.activeElement ??
+    document.activeElement;
+
   if (lastFocused === focusedElement) return;
   lastFocused = focusedElement;
 
@@ -46,10 +48,9 @@ function setInputValue(e) {
 }
 
 function getUpdatedValue(inputValue, mappings) {
-  const [key] = inputValue.match(new RegExp(/@\w+$/g));
+  const [key] = inputValue.match(new RegExp(/@\w+$/g)) ?? [null];
   if (key) {
     mappings.find((shortcut) => {
-      console.log(`@${shortcut.key}`, key);
       if (`@${shortcut.key}` === key) {
         inputValue = inputValue.replace(key, shortcut.value);
         return true;
@@ -72,6 +73,16 @@ const addEventListenerOnce = (element, eventName, listener) => {
     element.__eventListeners[eventName].push(listener);
   }
 };
+
+function findIframe(element) {
+  if (element.tagName === "IFRAME") {
+    return element;
+  } else if (element.parentElement) {
+    return findIframe(element.parentElement);
+  } else {
+    return null;
+  }
+}
 
 observer.observe(document, {
   subtree: true,
