@@ -17,7 +17,6 @@ document.addEventListener("focusin", (e) => {
     focusedElement instanceof HTMLInputElement ||
     focusedElement instanceof HTMLTextAreaElement
   ) {
-    console.log(focusedElement);
     if (
       !focusedElement.__eventListeners ||
       !focusedElement.__eventListeners["input"] ||
