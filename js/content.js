@@ -7,10 +7,8 @@ chrome.storage.local.get([localStorageIdentifier], function (e) {
 });
 
 let lastFocused;
-const observer = new MutationObserver(() => {
-  let focusedElement =
-    findIframe(document.activeElement)?.contentDocument?.activeElement ??
-    document.activeElement;
+document.addEventListener("focusin", (e) => {
+  let focusedElement = e.target;
 
   if (lastFocused === focusedElement) return;
   lastFocused = focusedElement;
@@ -19,6 +17,7 @@ const observer = new MutationObserver(() => {
     focusedElement instanceof HTMLInputElement ||
     focusedElement instanceof HTMLTextAreaElement
   ) {
+    console.log(focusedElement);
     if (
       !focusedElement.__eventListeners ||
       !focusedElement.__eventListeners["input"] ||
@@ -30,7 +29,7 @@ const observer = new MutationObserver(() => {
 });
 
 let updatedValue;
-function setInputValue(e) {
+const setInputValue = (e) => {
   if (e.target.value === updatedValue) return;
 
   chrome.storage.local.get([localStorageIdentifier], function (data) {
@@ -45,9 +44,9 @@ function setInputValue(e) {
     e.target.value = updatedValue;
     e.target.dispatchEvent(event);
   });
-}
+};
 
-function getUpdatedValue(inputValue, mappings) {
+const getUpdatedValue = (inputValue, mappings) => {
   const [key] = inputValue.match(new RegExp(/@\w+$/g)) ?? [null];
   if (key) {
     mappings.find((shortcut) => {
@@ -59,7 +58,7 @@ function getUpdatedValue(inputValue, mappings) {
     });
   }
   return inputValue;
-}
+};
 
 const addEventListenerOnce = (element, eventName, listener) => {
   if (!element.__eventListeners) {
@@ -73,20 +72,3 @@ const addEventListenerOnce = (element, eventName, listener) => {
     element.__eventListeners[eventName].push(listener);
   }
 };
-
-function findIframe(element) {
-  if (element.tagName === "IFRAME") {
-    return element;
-  } else if (element.parentElement) {
-    return findIframe(element.parentElement);
-  } else {
-    return null;
-  }
-}
-
-observer.observe(document, {
-  subtree: true,
-  childList: true,
-  attributes: true,
-  characterData: true,
-});
