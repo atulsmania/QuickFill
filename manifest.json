@@ -13,7 +13,10 @@
     }
   ],
   "action": {
-    "default_popup": "popup.html",
     "default_title": "QuickFill"
+  },
+  "background": {
+    "service_worker": "/js/background.js",
+    "type": "module"
   }
 }
