@@ -7,25 +7,28 @@ chrome.storage.local.get([localStorageIdentifier], function (e) {
 });
 
 let lastFocused;
-document.addEventListener("focusin", (e) => {
-  let focusedElement = e.target;
+document.addEventListener(
+  "focusin",
+  (e) => {
+    let focusedElement = e.target;
+    if (lastFocused === focusedElement) return;
+    lastFocused = focusedElement;
 
-  if (lastFocused === focusedElement) return;
-  lastFocused = focusedElement;
-
-  if (
-    focusedElement instanceof HTMLInputElement ||
-    focusedElement instanceof HTMLTextAreaElement
-  ) {
     if (
-      !focusedElement.__eventListeners ||
-      !focusedElement.__eventListeners["input"] ||
-      !focusedElement.__eventListeners["input"].includes(setInputValue)
+      focusedElement instanceof HTMLInputElement ||
+      focusedElement instanceof HTMLTextAreaElement
     ) {
-      addEventListenerOnce(focusedElement, "input", setInputValue);
+      if (
+        !focusedElement.__eventListeners ||
+        !focusedElement.__eventListeners["input"] ||
+        !focusedElement.__eventListeners["input"].includes(setInputValue)
+      ) {
+        addEventListenerOnce(focusedElement, "input", setInputValue);
+      }
     }
-  }
-});
+  },
+  { bubbles: true }
+);
 
 let updatedValue;
 const setInputValue = (e) => {
